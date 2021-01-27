@@ -1,0 +1,10 @@
+/Users/notoriousfilipe/Documents/Projects/the-rust-programming-language-book/chapter-2/guessing_game/target/rls/debug/deps/rand_core-e29e8bc681f72d97.rmeta: /Users/notoriousfilipe/.cargo/registry/src/github.com-1ecc6299db9ec823/rand_core-0.6.1/src/lib.rs /Users/notoriousfilipe/.cargo/registry/src/github.com-1ecc6299db9ec823/rand_core-0.6.1/src/block.rs /Users/notoriousfilipe/.cargo/registry/src/github.com-1ecc6299db9ec823/rand_core-0.6.1/src/error.rs /Users/notoriousfilipe/.cargo/registry/src/github.com-1ecc6299db9ec823/rand_core-0.6.1/src/impls.rs /Users/notoriousfilipe/.cargo/registry/src/github.com-1ecc6299db9ec823/rand_core-0.6.1/src/le.rs /Users/notoriousfilipe/.cargo/registry/src/github.com-1ecc6299db9ec823/rand_core-0.6.1/src/os.rs
+
+/Users/notoriousfilipe/Documents/Projects/the-rust-programming-language-book/chapter-2/guessing_game/target/rls/debug/deps/rand_core-e29e8bc681f72d97.d: /Users/notoriousfilipe/.cargo/registry/src/github.com-1ecc6299db9ec823/rand_core-0.6.1/src/lib.rs /Users/notoriousfilipe/.cargo/registry/src/github.com-1ecc6299db9ec823/rand_core-0.6.1/src/block.rs /Users/notoriousfilipe/.cargo/registry/src/github.com-1ecc6299db9ec823/rand_core-0.6.1/src/error.rs /Users/notoriousfilipe/.cargo/registry/src/github.com-1ecc6299db9ec823/rand_core-0.6.1/src/impls.rs /Users/notoriousfilipe/.cargo/registry/src/github.com-1ecc6299db9ec823/rand_core-0.6.1/src/le.rs /Users/notoriousfilipe/.cargo/registry/src/github.com-1ecc6299db9ec823/rand_core-0.6.1/src/os.rs
+
+/Users/notoriousfilipe/.cargo/registry/src/github.com-1ecc6299db9ec823/rand_core-0.6.1/src/lib.rs:
+/Users/notoriousfilipe/.cargo/registry/src/github.com-1ecc6299db9ec823/rand_core-0.6.1/src/block.rs:
+/Users/notoriousfilipe/.cargo/registry/src/github.com-1ecc6299db9ec823/rand_core-0.6.1/src/error.rs:
+/Users/notoriousfilipe/.cargo/registry/src/github.com-1ecc6299db9ec823/rand_core-0.6.1/src/impls.rs:
+/Users/notoriousfilipe/.cargo/registry/src/github.com-1ecc6299db9ec823/rand_core-0.6.1/src/le.rs:
+/Users/notoriousfilipe/.cargo/registry/src/github.com-1ecc6299db9ec823/rand_core-0.6.1/src/os.rs:

@@ -1,0 +1,1 @@
+/Users/notoriousfilipe/Documents/Projects/the-rust-programming-language-book/chapter-2/guessing_game/target/debug/guessing_game: /Users/notoriousfilipe/Documents/Projects/the-rust-programming-language-book/chapter-2/guessing_game/src/main.rs
