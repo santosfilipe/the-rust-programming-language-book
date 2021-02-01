@@ -1,0 +1,1 @@
+/Users/notoriousfilipe/Documents/Projects/the-rust-programming-language-book/chapter-3/loops/target/debug/loops: /Users/notoriousfilipe/Documents/Projects/the-rust-programming-language-book/chapter-3/loops/src/main.rs
