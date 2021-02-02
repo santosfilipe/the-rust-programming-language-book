@@ -1,0 +1,1 @@
+/Users/notoriousfilipe/Documents/Projects/the-rust-programming-language-book/chapter-3/functions/target/debug/functions: /Users/notoriousfilipe/Documents/Projects/the-rust-programming-language-book/chapter-3/functions/src/main.rs

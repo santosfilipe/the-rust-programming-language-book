@@ -118,3 +118,80 @@ fn main() {
     let second = a[1];
 }
 ```
+
+## Functions
+
+- Rust code uses snake case as the conventional style for function and variable names. In snake case, all letters are lowercase and underscores separate words.
+
+- Rust doesn’t care where you define your functions, only that they’re defined somewhere.
+
+- Example of a simple function that expects 1 parameter:
+
+```rust
+fn another_function(x: i32) {
+    println!("The value of x is: {}", x);
+}
+```
+
+- In function signatures, **you must declare the type of each parameter.** This is a deliberate decision in Rust’s design: requiring type annotations in function definitions means the compiler almost never needs you to use them elsewhere in the code to figure out what you mean.
+
+- Functions can return values to the code that calls them. We don’t name return values, but we do declare their type after an arrow (`->`).
+
+```rust
+fn five() -> i32 {
+    5
+}
+
+fn main() {
+    let x = five();
+
+    println!("The value of x is: {}", x);
+}
+```
+
+## Control Flow
+
+- You must be explicit and always provide `if` with a Boolean as its condition.
+
+- You can have multiple conditions by combining `if` and `else` in an `else if` expression. For example:
+
+```rust
+fn main() {
+    let number = 6;
+
+    if number % 4 == 0 {
+        println!("number is divisible by 4");
+    } else if number % 3 == 0 {
+        println!("number is divisible by 3");
+    } else if number % 2 == 0 {
+        println!("number is divisible by 2");
+    } else {
+        println!("number is not divisible by 4, 3, or 2");
+    }
+}
+```
+
+- Rust only executes the block for the first true condition, and once it finds one, it doesn’t even check the rest.
+
+- Example of a `for` loop iterating over a collection:
+
+```rust
+fn main() {
+    let a = [10, 20, 30, 40, 50];
+
+    for element in a.iter() {
+        println!("the value is: {}", element);
+    }
+}
+```
+
+- The safety and conciseness of `for` loops make them the most commonly used loop construct in Rust. Even in situations in which you want to run some code a certain number of times:
+
+```rust
+fn main() {
+    for number in (1..4).rev() {
+        println!("{}!", number);
+    }
+    println!("LIFTOFF!!!");
+}
+```
