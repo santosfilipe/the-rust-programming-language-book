@@ -59,3 +59,68 @@ fn main() {
     println!("{}, world!", s2);
 }
 ```
+
+## Ways Variables and Data Interact: **Clone**
+
+- If we do want to deeply copy the heap data of the `String`, not just the stack data, we can use a common method called `clone`.
+
+```rust
+let s1 = String::from("hello");
+let s2 = s1.clone();
+
+println!("s1 = {}, s2 = {}", s1, s2);
+```
+
+- The `clone` method is used with data types such as `String` due to the unpredictability of the size of data, which leads strings to be stored on the heap. Integers are stored on the stack due to it's fixed size, therefore there is no need to `clone` an integer and one can easily do it like in most other programming languages:
+
+```rust
+let x = 5;
+let y = x;
+
+println!("x = {}, y = {}", x, y);
+```
+
+## Ownership and Functions
+
+- The ownership of a variable follows the same pattern every time: assigning a value to another variable moves it. When a variable that includes data on the heap goes out of scope, the value will be cleaned up by drop unless the data has been moved to be owned by another variable.
+
+## References and Borrowing
+
+- Here is how you would define and use a calculate_length function that has a reference to an object as a parameter instead of taking ownership of the value:
+
+```rust
+fn main() {
+    let s1 = String::from("hello");
+
+    let len = calculate_length(&s1);
+
+    println!("The length of '{}' is {}.", s1, len);
+}
+
+fn calculate_length(s: &String) -> usize {
+    s.len()
+}
+```
+
+- Note that we pass `&s1` into `calculate_length` and, in its definition, we take `&String` rather than `String`. These ampersands are references, and they allow you to refer to some value without taking ownership of it.
+
+- We call having references as function parameters borrowing. As in real life, if a person owns something, you can borrow it from them. When you’re done, you have to give it back.
+
+- Just as variables are immutable by default, so are references. We’re not allowed to modify something we have a reference to.
+
+## Mutable References
+
+```rust
+fn main() {
+    let mut s = String::from("hello");
+
+    change(&mut s);
+}
+
+fn change(some_string: &mut String) {
+    some_string.push_str(", world");
+}
+```
+
+- First, we had to change `s` to be `mut`. Then we had to create a mutable reference with `&mut s` and accept a mutable reference with `some_string: &mut String`.
+
