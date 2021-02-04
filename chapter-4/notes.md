@@ -124,3 +124,46 @@ fn change(some_string: &mut String) {
 
 - First, we had to change `s` to be `mut`. Then we had to create a mutable reference with `&mut s` and accept a mutable reference with `some_string: &mut String`.
 
+## The Slice Type
+
+- Another data type that does not have ownership is the slice. Slices let you reference a contiguous sequence of elements in a collection rather than the whole collection.
+
+- A `String` can be converted into an array of bytes:
+
+```rust
+let bytes = s.as_bytes();
+```
+
+### String Slices
+
+- A string slice is a reference to part of a String, and it looks like this:
+
+```rust
+fn main() {
+    let s = String::from("hello world");
+
+    let hello = &s[0..5];
+    let world = &s[6..11];
+}
+```
+
+- We can create slices using a range within brackets by specifying `[starting_index..ending_index]`, where `starting_index` is the first position in the slice and `ending_index` is one more than the last position in the slice.
+
+- The type that signifies “string slice” is written as `&str`.
+
+- The correct implementation for a function that receives a `String` and has to return it's first word, is the following:
+
+```rust
+fn first_word(s: &String) -> &str {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
+
+    &s[..]
+}
+```
+
