@@ -167,3 +167,28 @@ fn first_word(s: &String) -> &str {
 }
 ```
 
+- A more experienced Rustacean would write the signature shown belown instead because it allows us to use the same function on both `&String` values and `&str` values:
+
+```rust
+fn first_word(s: &str) -> &str {
+
+}
+```
+
+- If we have a string slice, we can pass that directly. If we have a String, we can pass a slice of the entire String. Defining a function to take a string slice instead of a reference to a String makes our API more general and useful without losing any functionality.
+
+## Other Slices
+
+- Consider this array:
+
+```rust
+let a = [1, 2, 3, 4, 5];
+```
+
+- Just as we might want to refer to a part of a string, we might want to refer to part of an array. We’d do so like this:
+
+```rust
+let a = [1, 2, 3, 4, 5];
+
+let slice = &a[1..3];
+```

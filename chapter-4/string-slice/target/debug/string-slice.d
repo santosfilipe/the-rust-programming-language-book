@@ -1,1 +1,1 @@
-C:\Users\I844800\Desktop\rust\the-rust-programming-language-book\chapter-4\string-slice\target\debug\string-slice.exe: C:\Users\I844800\Desktop\rust\the-rust-programming-language-book\chapter-4\string-slice\src\main.rs
+/Users/notoriousfilipe/Documents/Projects/the-rust-programming-language-book/chapter-4/string-slice/target/debug/string-slice: /Users/notoriousfilipe/Documents/Projects/the-rust-programming-language-book/chapter-4/string-slice/src/main.rs
