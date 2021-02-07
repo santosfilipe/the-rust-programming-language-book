@@ -1,0 +1,1 @@
+/Users/notoriousfilipe/Documents/Projects/the-rust-programming-language-book/chapter-5/rectangles/target/debug/rectangles: /Users/notoriousfilipe/Documents/Projects/the-rust-programming-language-book/chapter-5/rectangles/src/main.rs

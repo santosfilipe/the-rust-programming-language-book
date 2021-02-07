@@ -124,3 +124,54 @@ error[E0106]: missing lifetime specifier
   |            ^ expected lifetime parameter
 ```
 
+## An Example Program Using Structs
+
+- The code for this section is structured in 3 different directories named `/rectangles-*`. 
+
+- The `println!` macro does not work out-of-the-box for `structs`. The following code will not work:
+
+```rust
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+fn main() {
+    let rect1 = Rectangle {
+        width: 30,
+        height: 50,
+    };
+
+    println!("rect1 is {}", rect1);
+}
+```
+
+- The `println!` macro has to be adjusted to include debug output formatting:
+
+```rust
+println!("rect1 is {:?}", rect1);
+```
+
+- To enable printing of `structs` using this identifier, the `struct` has to be explicitly enabled to:
+
+```rust
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+```
+
+- The `#[derive(Debug)]` annotation is used for this matter.
+
+## Method Syntax
+
+- Methods are different from functions in that they’re defined within the context of a `struct`, `enum` or a `trait` object, and their first parameter is always `self`, which represents the instance of the `struct` the method is being called on.
+
+- Methods can take multiple parameters that we add to the signature after the self parameter, and those parameters work just like parameters in functions.
+
+## Associated Functions
+
+- Another useful feature of `impl` blocks is that we’re allowed to define functions within `impl` blocks that don’t take `self` as a parameter. These are called associated functions because they’re associated with the struct.
+
+- Associated functions are often used for constructors that will return a new instance of the struct.

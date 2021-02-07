@@ -1,0 +1,1 @@
+/Users/notoriousfilipe/Documents/Projects/the-rust-programming-language-book/chapter-5/rectangles-with-structs/target/debug/rectangles-with-structs: /Users/notoriousfilipe/Documents/Projects/the-rust-programming-language-book/chapter-5/rectangles-with-structs/src/main.rs
