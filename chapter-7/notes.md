@@ -28,7 +28,7 @@
 
 - To show Rust where to find an item in a module tree, we use a path in the same way we use a path when navigating a filesystem. If we want to call a function, we need to know its path.
 
--  Our preference is to specify absolute paths because it’s more likely to move code definitions and item calls independently of each other.
+- Our preference is to specify absolute paths because it’s more likely to move code definitions and item calls independently of each other.
 
 - Modules aren’t useful only for organizing your code. They also define Rust’s privacy boundary: the line that encapsulates the implementation details external code isn’t allowed to know about, call, or rely on. So, if you want to make an item like a function or struct private, you put it in a module.
 
@@ -67,3 +67,139 @@ fn main() {
 
 ## Bringing Paths into Scope with the use Keyword
 
+- We can bring a path into a scope once and then call the items in that path as if they’re local items with the use keyword.
+
+- We bring the `crate::front_of_house::hosting` module into the scope of the `eat_at_restaurant` function so we only have to specify `hosting::add_to_waitlist` to call the `add_to_waitlist` function in `eat_at_restaurant`:
+
+```rust
+mod front_of_house {
+    pub mod hosting {
+        pub fn add_to_waitlist() {}
+    }
+}
+
+use crate::front_of_house::hosting;
+
+pub fn eat_at_restaurant() {
+    hosting::add_to_waitlist();
+    hosting::add_to_waitlist();
+    hosting::add_to_waitlist();
+}
+```
+
+- Adding `use` and a path in a scope is similar to creating a symbolic link in the filesystem.
+
+## Creating Idiomatic use Paths
+
+- Bringing the function’s parent module into scope with `use` so we have to specify the parent module when calling the function makes it clear that the function isn’t locally defined while still minimizing repetition of the full path.
+
+- On the other hand, when bringing in structs, enums, and other items with `use`, it’s idiomatic to specify the full path. Example of the idiomatic way to bring the standard library’s HashMap struct into the scope of a binary crate:
+
+```rust
+use std::collections::HashMap;
+
+fn main() {
+    let mut map = HashMap::new();
+    map.insert(1, 2);
+}
+```
+
+## Providing New Names with the as Keyword
+
+```rust
+use std::fmt::Result;
+use std::io::Result as IoResult;
+
+fn function1() -> Result {
+    // --snip--
+}
+
+fn function2() -> IoResult<()> {
+    // --snip--
+}
+```
+
+- In the second use statement, we chose the new name `IoResult` for the `std::io::Result` type, which won’t conflict with the `Result` from `std::fmt` that we’ve also brought into scope.
+
+## Re-exporting Names with pub use
+
+- When we bring a name into scope with the `use` keyword, the name available in the new scope is private. To enable the code that calls our code to refer to that name as if it had been defined in that code’s scope, we can combine `pub` and `use`. This technique is called re-exporting because we’re bringing an item into scope but also making that item available for others to bring into their scope:
+
+```rust
+mod front_of_house {
+    pub mod hosting {
+        pub fn add_to_waitlist() {}
+    }
+}
+
+pub use crate::front_of_house::hosting;
+
+pub fn eat_at_restaurant() {
+    hosting::add_to_waitlist();
+    hosting::add_to_waitlist();
+    hosting::add_to_waitlist();
+}
+```
+
+## Using External Packages
+
+- Members of the Rust community have made many packages available at crates.io, and pulling any of them into your package involves these same steps: listing them in your package’s `Cargo.toml` file and using `use` to bring items from their crates into scope.
+
+- Adding rand as a dependency in Cargo.toml tells Cargo to download the rand package and any dependencies from crates.io and make rand available to our project.
+
+```toml
+[dependencies]
+rand = "0.5.5"
+```
+
+## Using Nested Paths to Clean Up Large use Lists
+
+- If we’re using multiple items defined in the same crate or same module, listing each item on its own line can take up a lot of vertical space in our files.
+
+- Regular `use`:
+
+```rust
+use rand::Rng;
+// --snip--
+use std::cmp::Ordering;
+use std::io;
+// --snip--
+```
+
+- Nested `use`:
+
+```rust
+// --snip--
+use std::{cmp::Ordering, io};
+// --snip--
+```
+
+- This line brings `std::io` and `std::io::Write` into scope:
+
+```rust
+use std::io::{self, Write};
+```
+
+## The Glob Operator
+
+If we want to bring all public items defined in a path into scope, we can specify that path followed by `*`, the glob operator:
+
+```rust
+use std::collections::*;
+```
+
+## Separating Modules into Different Files
+
+```rust
+mod front_of_house;
+
+pub use crate::front_of_house::hosting;
+
+pub fn eat_at_restaurant() {
+    hosting::add_to_waitlist();
+    hosting::add_to_waitlist();
+    hosting::add_to_waitlist();
+}
+```
+
+- Using a semicolon after `mod front_of_house` rather than using a block tells Rust to load the contents of the module from another file with the same name as the module.
