@@ -1,0 +1,1 @@
+/Users/notoriousfilipe/Documents/Projects/the-rust-programming-language-book/chapter-8/strings-playground/target/debug/strings-playground: /Users/notoriousfilipe/Documents/Projects/the-rust-programming-language-book/chapter-8/strings-playground/src/main.rs
