@@ -1,0 +1,1 @@
+/Users/notoriousfilipe/Documents/Projects/the-rust-programming-language-book/chapter-8/vectors-playground/target/debug/vectors-playground: /Users/notoriousfilipe/Documents/Projects/the-rust-programming-language-book/chapter-8/vectors-playground/src/main.rs
