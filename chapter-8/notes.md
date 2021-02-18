@@ -190,3 +190,129 @@ for c in "नमस्ते".chars() {
 ```
 
 - But be sure to remember that valid Unicode scalar values may be made up of more than 1 byte.
+
+## Storing Keys with Associated Values in Hash Maps
+
+- The type `HashMap<K, V>` stores a mapping of keys of type `K` to values of type `V`.
+
+### Creating a New Hash Map
+
+- You can create an empty hash map with `new` and add elements with `insert`:
+
+```rust
+use std::collections::HashMap;
+
+let mut scores = HashMap::new();
+
+scores.insert(String::from("Blue"), 10);
+scores.insert(String::from("Yellow"), 50);
+```
+
+- Hash maps also have less support from the standard library; there’s no built-in macro to construct them, for example.
+
+- Like vectors, hash maps are homogeneous: all of the keys must have the same type, and all of the values must have the same type.
+
+- The `zip` method can be used to combine 2 `vectors` into a `HashMap`:
+
+```rust
+use std::collections::HashMap;
+
+let teams = vec![String::from("Blue"), String::from("Yellow")];
+let initial_scores = vec![10, 50];
+
+let mut scores: HashMap<_, _> =
+    teams.into_iter().zip(initial_scores.into_iter()).collect();
+```
+
+- The type annotation `HashMap<_, _>` is needed here because it’s possible to collect into many different data structures and Rust doesn’t know which you want unless you specify. For the parameters for the key and value types, however, we use underscores, and Rust can infer the types that the hash map contains based on the types of the data in the vectors.
+
+### Hash Maps and Ownership
+
+- For types that implement the `Copy` trait, like `i32`, the values are copied into the hash map. For owned values like `String`, the values will be moved and the hash map will be the owner of those values.
+
+### Accessing Values in a Hash Map
+
+- We can get a value out of the hash map by providing its key to the `get` method:
+
+```rust
+use std::collections::HashMap;
+
+let mut scores = HashMap::new();
+
+scores.insert(String::from("Blue"), 10);
+scores.insert(String::from("Yellow"), 50);
+
+let team_name = String::from("Blue");
+let score = scores.get(&team_name);
+```
+
+- We can iterate over each key/value pair in a hash map in a similar manner as we do with vectors, using a `for` loop:
+
+```rust
+use std::collections::HashMap;
+
+let mut scores = HashMap::new();
+
+scores.insert(String::from("Blue"), 10);
+scores.insert(String::from("Yellow"), 50);
+
+for (key, value) in &scores {
+    println!("{}: {}", key, value);
+}
+```
+
+### Updating a Hash Map
+
+- When you want to change the data in a hash map, you have to decide how to handle the case when a key already has a value assigned. You could replace the old value with the new value, completely disregarding the old value. You could keep the old value and ignore the new value, only adding the new value if the key doesn’t already have a value. Or you could combine the old value and the new value.
+
+#### Overwriting a Value
+
+```rust
+use std::collections::HashMap;
+
+let mut scores = HashMap::new();
+
+scores.insert(String::from("Blue"), 10);
+scores.insert(String::from("Blue"), 25);
+
+println!("{:?}", scores);
+```
+
+#### Only Inserting a Value If the Key Has No Value
+
+```rust
+use std::collections::HashMap;
+
+let mut scores = HashMap::new();
+scores.insert(String::from("Blue"), 10);
+
+scores.entry(String::from("Yellow")).or_insert(50);
+scores.entry(String::from("Blue")).or_insert(50);
+
+println!("{:?}", scores);
+```
+
+- The `or_insert` method on `Entry` is defined to return a mutable reference to the value for the corresponding `Entry` key if that key exists, and if not, inserts the parameter as the new value for this key and returns a mutable reference to the new value. This technique is much cleaner than writing the logic ourselves and, in addition, plays more nicely with the borrow checker.
+
+#### Updating a Value Based on the Old Value
+
+```rust
+use std::collections::HashMap;
+
+let text = "hello world wonderful world";
+
+let mut map = HashMap::new();
+
+for word in text.split_whitespace() {
+    let count = map.entry(word).or_insert(0);
+    *count += 1;
+}
+
+println!("{:?}", map);
+```
+
+- The `or_insert` method actually returns a mutable reference `(&mut V)` to the value for this key. Here we store that mutable reference in the `count` variable, so in order to assign to that value, we must first dereference `count` using the asterisk `(*)`.
+
+### Hashing Functions
+
+- By default, `HashMap` uses a “cryptographically strong” hashing function that can provide resistance to Denial of Service (DoS) attacks. 
