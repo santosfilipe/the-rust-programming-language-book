@@ -190,3 +190,8 @@ fn main() -> Result<(), Box<dyn Error>> {
 }
 ```
 
+## To panic! or Not to panic!
+
+- When you choose to return a `Result` value, you give the calling code options rather than making the decision for it. The calling code could choose to attempt to recover in a way that’s appropriate for its situation, or it could decide that an `Err` value in this case is unrecoverable, so it can call `panic!` and turn your recoverable error into an unrecoverable one.
+
+- Returning `Result` is a good default choice when you’re defining a function that might fail.
